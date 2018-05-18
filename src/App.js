@@ -23,7 +23,7 @@ export default class Interview extends React.Component {
           <Li>Document your work carefully. Note down any external resources, libraries or frameworks you used.</Li>
           <Li><b>When you’re done, email your work to us at <Email email="interview@usepolymer.com"/></b> with full instructions on how to view your code and run the app. You can send us a JSFiddle, .zip file, public Github repo, or any other easily accessible source.</Li>
         </ol>
-        <div style={form_style}>
+        <div style={{display: "flex"}}>
           <div style={{paddingRight: '8px', width: "100%"}}>
             <Input placeholder="Your full name" value={this.state.name} onChange={e => this.setState({name: e.target.value})}/>
           </div>
@@ -46,7 +46,7 @@ function Time({t}) {
   let submitted = moment(t)
   let deadline = moment(submitted).add(3, 'h')
   return (
-    <div style={{display: 'flex', flexDirection: 'column', textAlign: 'center', marginTop: "24px", fontSize: "20px", lineHeight: "30px"}}>
+    <div style={{textAlign: 'center', marginTop: "24px", fontSize: "20px", lineHeight: "30px"}}>
       <div>You started at {submitted.format(format)}.</div>
       <div style={{display: 'block'}}>Submit your work by <b>{deadline.format(format)}</b>.</div> 
     </div>
@@ -54,7 +54,7 @@ function Time({t}) {
 }
 
 function Li({ children, ...rest }) {
-  return <li style={li_style} {...rest}>{children}</li>
+  return <li style={{marginBottom: "20px"}} {...rest}>{children}</li>
 }
 
 function Email({ email, ...rest}) {
@@ -81,12 +81,4 @@ const ol_style = {
   padding: 0,
   border: 0,
   listStyle: "decimal",
-}
-
-const li_style = {
-  marginBottom: "20px",
-}
-
-const form_style = {
-  display: "flex",
 }
