@@ -1,8 +1,12 @@
 import React from 'react'
 import moment from 'moment'
+import * as emailjs from 'emailjs-com'
 import { Input, Button } from 'antd'
 import 'antd/lib/button/style/css'
 import 'antd/lib/input/style/css'
+
+const format = 'h:mm A on M/D'
+emailjs.init("user_3E2uLUmbsB5dvMMsQhFaB");
 
 export default class Interview extends React.Component {
   constructor(props) {
@@ -38,11 +42,16 @@ export default class Interview extends React.Component {
     let now = new Date()
     this.setState({ submitted: now })
     window.localStorage.setItem('submitted', now)
+
+    emailjs.send("gmail", "template_interview_started", { 
+      candidate: this.state.name,
+      start_time: moment(now).format(format),
+      end_time: moment(now).add(3, 'h').format(format),
+    })
   }
 }
 
 function Time({t}) {
-  let format = 'h:mm A on M/D'
   let submitted = moment(t)
   let deadline = moment(submitted).add(3, 'h')
   return (
@@ -59,14 +68,15 @@ function Li({ children, ...rest }) {
 
 function Email({ email, ...rest}) {
   return <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer" {...rest}>{email}</a>
-
 }
 
 const wrapper_style = {
-  maxWidth: "500px",
+  maxWidth: "700px",
   margin: "0 auto",
-  paddingTop: '48px',
+  padding: '48px 100px 0 100px',
   color: "black",
+  backgroundColor: 'white',
+  height: '100%',
 }
 
 const header_style = {
