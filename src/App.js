@@ -25,7 +25,7 @@ export default class Interview extends React.Component {
           <Li>After you hit <b>Start</b>, the challenge prompt PDF will download and your timer will start. You will have <b>3 hours</b> to submit your work. Make sure have a quiet place to work and no distractions for the next few hours!</Li>
           <Li> We use React at Polymer, so if you know it, great! If you don’t, not a problem - feel free to use any language or framework you’re comfortable in. </Li>
           <Li>Document your work carefully. Note down any external resources, libraries or frameworks you used.</Li>
-          <Li><b>When you’re done, email your work to us at <Email email="interview@usepolymer.com"/></b> with full instructions on how to view your code and run the app. You can send us a JSFiddle, .zip file, public Github repo, or any other easily accessible source.</Li>
+          <Li><b>When you’re done, email your work to us at <Email email="admin@usepolymer.com"/></b> with full instructions on how to view your code and run the app. You can send us a JSFiddle, .zip file, public Github repo, or any other easily accessible source.</Li>
         </ol>
         <div style={{display: "flex"}}>
           <div style={{paddingRight: '8px', width: "100%"}}>
@@ -42,6 +42,12 @@ export default class Interview extends React.Component {
     let now = new Date()
     this.setState({ submitted: now })
     window.localStorage.setItem('submitted', now)
+    
+    window.open('https://s3-us-west-1.amazonaws.com/polymer-techchallenge/Remote+Technical+Challenge.pdf')
+
+    if (window.location.href.includes('localhost')) {
+      return 
+    }
 
     emailjs.send("gmail", "template_interview_started", { 
       candidate: this.state.name,
